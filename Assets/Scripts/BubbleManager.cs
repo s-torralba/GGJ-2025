@@ -5,8 +5,11 @@ using UnityEngine;
 public class BubbleManager : MonoBehaviour
 {
     public GameObject bubblePrefab;
+
     public Vector2 spawnArea = new Vector2(8f, 5f);
     public float spawnInterval = 2f;
+    public Vector2 scaleRange;
+
     private float _timer;
 
     // Start is called before the first frame update
@@ -31,11 +34,16 @@ public class BubbleManager : MonoBehaviour
         // Spawn at random position within the area
         float x = Random.Range(-spawnArea.x / 2, spawnArea.x / 2);
         float y = Random.Range(-spawnArea.y / 2, spawnArea.y / 2);
-
         Vector3 spawnPosition = new Vector3(x + transform.position.x, y + transform.position.y, 0f);
 
         // Instantiate the bubble prefab
-        Instantiate(bubblePrefab, spawnPosition, Quaternion.identity);
+        GameObject bubble = Instantiate(bubblePrefab, spawnPosition, Quaternion.identity, transform);
+
+        // Scale it
+        float randomScale = Random.Range(scaleRange.x, scaleRange.y);
+        Vector3 randomScaleVector = new Vector3(randomScale, randomScale, randomScale);
+        bubble.transform.localScale = randomScaleVector;
+
         Debug.Log("Bubble spawned");
     }
 }

@@ -8,6 +8,10 @@ public class Bubble : MonoBehaviour
     public float frequency = 1f;
     private int directionX= 1;
 
+    [SerializeField] private GameObject letter;
+    public float maxLetterRotation;
+    public float speedLetterRotation;
+
     private Rigidbody2D _rb;
     private float _time;
 
@@ -34,9 +38,8 @@ public class Bubble : MonoBehaviour
     {
         _time += Time.fixedDeltaTime;
 
-        float sinSpeedx = Mathf.Sin(_time * frequency) * speed.x * directionX;
-
-        _rb.velocity = new Vector2(sinSpeedx, speed.y);
+        _RotateLetter();
+        _MoveBubble();
     }
 
     void OnMouseDown()
@@ -48,4 +51,19 @@ public class Bubble : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void _RotateLetter()
+    {
+        if (letter != null)
+        {
+            float letterRotationY = Mathf.Sin(_time * speedLetterRotation) * maxLetterRotation;
+            letter.transform.localRotation = Quaternion.Euler(0f, letterRotationY, 0f);
+        }
+
+    }
+
+    private void _MoveBubble()
+    {
+        float sinSpeedx = Mathf.Sin(_time * frequency) * speed.x * directionX;
+        _rb.velocity = new Vector2(sinSpeedx, speed.y);
+    }
 }

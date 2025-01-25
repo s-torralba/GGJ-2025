@@ -3941,6 +3941,7 @@ MonoBehaviour:
   bubblePrefab: {fileID: 1824499279631301508, guid: 79da101f4cdbc074b87ca3cf037a69a4, type: 3}
   spawnArea: {x: 10, y: 2}
   spawnInterval: 0.8
+  scaleRange: {x: 0.5, y: 2}
 --- !u!4 &1587565493
 Transform:
   m_ObjectHideFlags: 0
@@ -5653,6 +5654,14 @@ PrefabInstance:
     - target: {fileID: 1824499279631301508, guid: 79da101f4cdbc074b87ca3cf037a69a4, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3426025875317986063, guid: 79da101f4cdbc074b87ca3cf037a69a4, type: 3}
+      propertyPath: maxLetterRotation
+      value: 60.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3426025875317986063, guid: 79da101f4cdbc074b87ca3cf037a69a4, type: 3}
+      propertyPath: speedLetterRotation
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4267772880530046972, guid: 79da101f4cdbc074b87ca3cf037a69a4, type: 3}
       propertyPath: m_SortingOrder
