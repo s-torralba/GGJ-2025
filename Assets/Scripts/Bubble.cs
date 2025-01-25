@@ -16,6 +16,14 @@ public class Bubble : MonoBehaviour
         directionX *= -1;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "DestroyArea")
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
