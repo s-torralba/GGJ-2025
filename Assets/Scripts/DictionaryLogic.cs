@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class WordDictionary : MonoBehaviour
 {
     public TextAsset mDictionaryFile;
     private HashSet<string> mWordList; // Use HashSet for faster lookups
 
-    public string mWordToFind;
+    public TMP_InputField mWordToFind;
 
-    public bool FindEnable = false;
-    public bool WordFound = false; // Renamed for better clarity
+    public event Action<string> OnValidWord;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +41,12 @@ public class WordDictionary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindEnable)
+        string word = mWordToFind.text.Trim();
+        bool WordFound = FindWord(word);
+        if (WordFound)
         {
-            FindEnable = false;
-            WordFound = FindWord(mWordToFind);
-            Debug.Log($"Word '{mWordToFind}' found: {WordFound}");
+            OnValidWord?.Invoke(word);
         }
+        Debug.Log($"Word '{mWordToFind}' found: {WordFound}");
     }
 }

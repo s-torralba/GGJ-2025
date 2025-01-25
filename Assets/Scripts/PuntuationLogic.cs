@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI; // Required for UI components
+using TMPro;
+using System.Collections;
 
 public class WordScorer : MonoBehaviour
 {
     public TextAsset LetterWeightsFile;    // Assign your .txt file here in the Inspector
-    public string WordInputField;     // InputField for entering the word to evaluate
-    public Text ScoreOutputText;          // Text element to display the score (optional)
+    public TextMeshProUGUI ScoreOutputText;          // Text element to display the score (optional)
 
     private Dictionary<char, int> letterWeights; // To store letter and weight pairs
 
@@ -24,10 +25,6 @@ public class WordScorer : MonoBehaviour
         {
             Debug.LogError("LetterWeightsFile is not assigned!");
         }
-    }
-    void Update()
-    {
-        EvaluateWord();
     }
 
     // Method to parse the letter weights file
@@ -82,18 +79,24 @@ public class WordScorer : MonoBehaviour
         return score;
     }
 
-    // Method called by the UI to calculate and display the score of the entered word
-    public void EvaluateWord()
+    // Subscribes to the Dictionary's OnValidWord event
+    public void SubscribeToDictionary(WordDictionary dictionary)
     {
-        if (WordInputField != null)
+        dictionary.OnValidWord += EvaluateWordScore;
+    }
+
+    // Method called by the UI to calculate and display the score of the entered word
+    public void EvaluateWordScore(string inputWord)
+    {
+        if (inputWord != null)
         {
-            string inputWord = WordInputField; //.text.Trim(); // Get the text from InputField
             int wordScore = CalculateWordScore(inputWord);
 
             // Display the score in the UI
             if (ScoreOutputText != null)
             {
-                ScoreOutputText.text = $"The score for '{inputWord}' is: {wordScore}";
+                //ScoreOutputText.text = $"The score for '{inputWord}' is: {wordScore}";
+                ScoreOutputText.text = $"SCORE: {wordScore}";
             }
 
             Debug.Log($"The score for '{inputWord}' is: {wordScore}");
