@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 public class WordDictionary : MonoBehaviour
 {
-    public TextAsset DictionaryFile;
+    public TextAsset mDictionaryFile;
+    private HashSet<string> mWordList; // Use HashSet for faster lookups
 
-    public string WordToFind;
-
-    private HashSet<string> dictionaryWords; // Use HashSet for faster lookups
+    public string mWordToFind;
 
     public bool FindEnable = false;
     public bool WordFound = false; // Renamed for better clarity
@@ -16,14 +15,14 @@ public class WordDictionary : MonoBehaviour
     void Start()
     {
         // Initialize the HashSet and load words
-        dictionaryWords = new HashSet<string>();
+        mWordList = new HashSet<string>();
 
-        if (DictionaryFile != null)
+        if (mDictionaryFile != null)
         {
-            string[] words = DictionaryFile.text.Split('\n');
+            string[] words = mDictionaryFile.text.Split('\n');
             foreach (string word in words)
             {
-                dictionaryWords.Add(word.Trim().ToLower());
+                mWordList.Add(word.Trim().ToLower());
             }
         }
         else
@@ -34,7 +33,7 @@ public class WordDictionary : MonoBehaviour
 
     public bool FindWord(string word)
     {
-        return dictionaryWords.Contains(word.ToLower());
+        return mWordList.Contains(word.ToLower());
     }
 
     // Update is called once per frame
@@ -43,8 +42,8 @@ public class WordDictionary : MonoBehaviour
         if (FindEnable)
         {
             FindEnable = false;
-            WordFound = FindWord(WordToFind);
-            Debug.Log($"Word '{WordToFind}' found: {WordFound}");
+            WordFound = FindWord(mWordToFind);
+            Debug.Log($"Word '{mWordToFind}' found: {WordFound}");
         }
     }
 }
