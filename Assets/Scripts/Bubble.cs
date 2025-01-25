@@ -6,9 +6,15 @@ public class Bubble : MonoBehaviour
 {
     public Vector2 speed;
     public float frequency = 1f;
+    private int directionX= 1;
 
     private Rigidbody2D _rb;
     private float _time;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        directionX *= -1;
+    }
 
     void Start()
     {
@@ -20,7 +26,7 @@ public class Bubble : MonoBehaviour
     {
         _time += Time.fixedDeltaTime;
 
-        float sinSpeedx = Mathf.Sin(_time * frequency) * speed.x;
+        float sinSpeedx = Mathf.Sin(_time * frequency) * speed.x * directionX;
 
         _rb.velocity = new Vector2(sinSpeedx, speed.y);
     }
