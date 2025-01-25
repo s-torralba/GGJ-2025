@@ -24,4 +24,14 @@ public class Bubble : MonoBehaviour
 
         _rb.velocity = new Vector2(sinSpeedx, speed.y);
     }
+
+    void OnMouseDown()
+    {
+        // Example: Play sound or animation here
+        Debug.Log("Bubble popped!");
+
+        // Destroy the bubble
+        Destroy(gameObject);
+    }
+
 }
