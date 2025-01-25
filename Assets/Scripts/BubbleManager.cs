@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class BubbleManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class BubbleManager : MonoBehaviour
     public Vector2 scaleRange;
 
     private float _timer;
+    private string letterPath;
+    [SerializeField] private LetterCollector letterCollector;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +42,16 @@ public class BubbleManager : MonoBehaviour
         // Instantiate the bubble prefab
         GameObject bubble = Instantiate(bubblePrefab, spawnPosition, Quaternion.identity, transform);
 
+        Debug.Log("Bubble spawned");
+        
         // Scale it
         float randomScale = Random.Range(scaleRange.x, scaleRange.y);
         Vector3 randomScaleVector = new Vector3(randomScale, randomScale, randomScale);
         bubble.transform.localScale = randomScaleVector;
 
-        Debug.Log("Bubble spawned");
+        bubble.GetComponent<Bubble>().ChangeLetter("B");
+        bubble.GetComponent<Bubble>().AssignCollector(letterCollector);
     }
+
+
 }

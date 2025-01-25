@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Bubble : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class Bubble : MonoBehaviour
     [SerializeField] private GameObject letter;
     public float maxLetterRotation;
     public float speedLetterRotation;
+    private string letterName;
+    private LetterCollector letterCollector;
 
     private Rigidbody2D _rb;
     private float _time;
+
+    private static string spritePath = "kenney_letter-tiles (1)/PNG/Wood/letter_";
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -51,6 +56,15 @@ public class Bubble : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void OnDestroy()
+    {
+        // When the bubble is destroyed, send its letterName to the LetterCollector
+        if (letterCollector != null)
+        {
+            letterCollector.CollectLetter(letterName);
+        }
+    }
+
     private void _RotateLetter()
     {
         if (letter != null)
@@ -65,5 +79,38 @@ public class Bubble : MonoBehaviour
     {
         float sinSpeedx = Mathf.Sin(_time * frequency) * speed.x * directionX;
         _rb.velocity = new Vector2(sinSpeedx, speed.y);
+    }
+
+    public void ChangeLetter(string uppercaseLetter)
+    {
+        SpriteRenderer spriteRenderer = letter.GetComponent<SpriteRenderer>();
+        letterName = uppercaseLetter;
+
+        string computedPath = spritePath + uppercaseLetter;
+        if (spriteRenderer != null)
+        {
+            // Load the new sprite from the Resources folder
+            Sprite newSprite = Resources.Load<Sprite>(computedPath);
+
+            if (newSprite != null)
+            {
+                // Assign the new sprite to the SpriteRenderer
+                spriteRenderer.sprite = newSprite;
+                Debug.Log($"Sprite successfully changed to: {computedPath}");
+            }
+            else
+            {
+                Debug.LogError($"Sprite not found at path: {computedPath}. Make sure the sprite is in a 'Resources' folder.");
+            }
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer not found on the 'Letter' GameObject.");
+        }
+    }
+
+    public void AssignCollector (LetterCollector collector)
+    {
+        letterCollector = collector;
     }
 }
