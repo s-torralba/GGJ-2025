@@ -1,12 +1,16 @@
 using UnityEngine;
-using TMPro; // Required for TextMeshPro
+using TMPro;
+using System.Collections.Generic; // Required for TextMeshPro
 
 public class GameManager : MonoBehaviour
 {
     [Header("Game Components")]
     public WordDictionary dictionary;      // Reference to the Dictionary script
     public WordScorer puntuator;        // Reference to the Puntuator script
+    public BubbleManager bubbleManager;
 
+    public int numberOfWordsPerLevel = 4;
+    public int randomLettersToAddPerLevel = 7;
     //[Header("UI Components")]
     //public TMP_InputField wordInputField; // InputField for player to type a word
     //public TextMeshProUGUI feedbackText;  // Text to display feedback (e.g., valid/invalid, score)
@@ -26,6 +30,10 @@ public class GameManager : MonoBehaviour
 
         // Clear feedback text on start
         //feedbackText.text = "Type a word and press Enter to validate!";
+
+        // Start level
+        List<string> wordsChosen = dictionary.ChooseWords(numberOfWordsPerLevel);
+        bubbleManager.ChooseLetters(wordsChosen, randomLettersToAddPerLevel);
     }
 
     // Called when the player presses Enter or a button to validate a word

@@ -3654,6 +3654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dictionary: {fileID: 1061985136}
   puntuator: {fileID: 585378849}
+  bubbleManager: {fileID: 1587565492}
+  numberOfWordsPerLevel: 4
+  randomLettersToAddPerLevel: 7
 --- !u!4 &1455867001
 Transform:
   m_ObjectHideFlags: 0
@@ -5263,12 +5266,8 @@ MonoBehaviour:
   spawnArea: {x: 10, y: 2}
   spawnInterval: 0.8
   scaleRange: {x: 0.5, y: 2}
+  wordsToGenerate: []
   lettersToGenerate: 
-  wordsToGenerate:
-  - hola
-  - cafe
-  - zaragoza
-  randomLetter: 6
   letterCollector: {fileID: 833568596}
 --- !u!4 &1587565493
 Transform:

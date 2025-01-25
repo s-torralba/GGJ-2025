@@ -31,11 +31,47 @@ public class WordDictionary : MonoBehaviour
         {
             Debug.LogError("DictionaryFile is not assigned!");
         }
+
+        List<string> wordsChosen = ChooseWords(3);
+        int a = 3;
+
     }
 
     public bool FindWord(string word)
     {
         return mWordList.Contains(word.ToLower());
+    }
+
+    public List<string> ChooseWords(int numberOfWords)
+    {
+        // Convert HashSet to a List for indexed access
+        List<string> wordList = new List<string>(mWordList);
+
+        // Handle cases where the requested number of words exceeds the available words
+        if (numberOfWords > wordList.Count)
+        {
+            Debug.LogWarning("Requested more words than available. Returning all words.");
+            return wordList;
+        }
+
+        // Create a list to store the chosen words
+        List<string> chosenWords = new List<string>();
+        System.Random random = new System.Random();
+
+        // Randomly pick words
+        while (chosenWords.Count < numberOfWords)
+        {
+            // Get a random word from the list
+            string randomWord = wordList[random.Next(0, wordList.Count)];
+
+            // Avoid duplicates in the chosen words list
+            if (!chosenWords.Contains(randomWord))
+            {
+                chosenWords.Add(randomWord);
+            }
+        }
+
+        return chosenWords;
     }
 
     // Update is called once per frame

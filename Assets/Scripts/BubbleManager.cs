@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class BubbleManager : MonoBehaviour
 {
+    // Bubble generation
     public GameObject bubblePrefab;
 
     public Vector2 spawnArea = new Vector2(8f, 5f);
@@ -14,20 +15,18 @@ public class BubbleManager : MonoBehaviour
     public Vector2 scaleRange;
 
     private float _timer;
-    private string letterPath;
-    [SerializeField] private List<char> lettersToGenerate = new List<char>();
+
+    // Letter generation
     public List<string> wordsToGenerate = new List<string>();
-    public int randomLetter;
+    [SerializeField] private List<char> lettersToGenerate = new List<char>();
     [SerializeField] private LetterCollector letterCollector;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        List<string> list = new List<string>();
-        ChooseLetters(list, randomLetter);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         _timer += Time.deltaTime;
@@ -40,7 +39,7 @@ public class BubbleManager : MonoBehaviour
 
     public void ChooseLetters(List<string> words, int randomLettersAdded)
     {
-        words = wordsToGenerate;
+        wordsToGenerate = words;
         // Dictionary to track max occurrences of each letter across all words
         Dictionary<char, int> resultLetterMap = new Dictionary<char, int>();
         foreach (string word in words)
