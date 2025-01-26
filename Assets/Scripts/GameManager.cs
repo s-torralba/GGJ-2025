@@ -1,15 +1,15 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.SocialPlatforms.Impl; // Required for TextMeshPro
+using UnityEngine.SocialPlatforms.Impl; 
 using UnityEngine.UI;
-using Unity.VisualScripting; // Required for TextMeshPro
+using Unity.VisualScripting; 
 
 public class GameManager : MonoBehaviour
 {
     [Header("Game Components")]
-    public WordDictionary dictionary;      // Reference to the Dictionary script
-    public WordScorer puntuator;        // Reference to the Puntuator script
+    public WordDictionary dictionary;     
+    public WordScorer puntuator;        
     public BubbleManager bubbleManager;
 
     public int numberOfWordsPerLevel = 4;
@@ -20,15 +20,19 @@ public class GameManager : MonoBehaviour
     public int maxScore = 0;
     public int maxRound = 0;
 
-    public LetterAccumulator letterAccumulator;        // Reference to the Puntuator script
+    public LetterAccumulator letterAccumulator;        
 
-    public LetterCollector letterCollector; // Reference to the Letter Collector script
-    public GridLayoutGroup letterBoardGrid; // Reference to the letter board grid layout group
+    public LetterCollector letterCollector; 
+    public GridLayoutGroup letterBoardGrid; 
 
-    [SerializeField] private GameObject letterSlotPrefab; // Prefab for the draggable letter object
-    [SerializeField] private GameObject letterPrefab; // Prefab for the draggable letter object
+    [SerializeField] private GameObject letterSlotPrefab; 
+    [SerializeField] private GameObject letterPrefab; 
 
     [SerializeField] GameObject HUDUp;
+    public TextMeshProUGUI targetOutputText;          
+    public TextMeshProUGUI totalScoreOutputText;         
+    public TextMeshProUGUI roundOutputText;         
+
     [SerializeField] GameObject HUDDown;
     [SerializeField] GameObject LoseScreen;
 
@@ -37,27 +41,16 @@ public class GameManager : MonoBehaviour
 
     private int scoreTarget = 3;
     
-    //[Header("UI Components")]
-    //public TMP_InputField wordInputField; // InputField for player to type a word
-    //public TextMeshProUGUI feedbackText;  // Text to display feedback (e.g., valid/invalid, score)
-
-    // Start is called before the first frame update
     void Start()
     {
-        // Ensure all components are assigned
-        if (dictionary == null || puntuator == null /*|| wordInputField == null || feedbackText == null*/)
+        if (dictionary == null || puntuator == null)
         {
             Debug.LogError("GameManager is missing required components!");
             return;
         }
 
-        // Subscribe Puntuator to Dictionary's word validation event
         dictionary.SubscribeToOnWord(letterAccumulator);
         puntuator.SubscribeToDictionary(dictionary);
-
-        // Clear feedback text on start
-        //feedbackText.text = "Type a word and press Enter to validate!";
-
     }
 
     private void Update()
@@ -82,31 +75,11 @@ public class GameManager : MonoBehaviour
         if (!HUDDown.activeSelf && bubbleManager.hasFinished && hasStarted)
         {
             HUDDown.SetActive(true);
+            targetOutputText.text = " ";
             puntuator.UpdateTarget(scoreTarget);
 
         }
     }
-
-    // Called when the player presses Enter or a button to validate a word
-    /*
-    public void ValidateInputWord()
-    {
-        // Get the word from the InputField
-        string word = wordInputField.text.Trim();
-
-        // Check if the InputField is empty
-        if (string.IsNullOrEmpty(word))
-        {
-            feedbackText.text = "Please enter a word.";
-            return;
-        }
-
-        // Ask the Dictionary to validate the word
-        dictionary.ValidateWord(word);
-
-        // Clear the InputField after validation
-        wordInputField.text = "";
-    }*/
 
     public void StartGame()
     {
@@ -125,7 +98,6 @@ public class GameManager : MonoBehaviour
         {
             HUDUp.GetComponentInChildren<DropCollector>().ResetChildren();
         }
-        //HUDUp.SetActive(false);
 
         if (HUDDown.GetComponentInChildren<LetterAccumulator>())
         {
@@ -136,6 +108,10 @@ public class GameManager : MonoBehaviour
 
         letterCollector.collectedLetters = new List<string>();
         collectedCount = 0;
+
+        targetOutputText.text = "TARGET : " + scoreTarget;
+        totalScoreOutputText.text = "TOTAL SCORE : " + totalScore;
+        roundOutputText.text = "ROUND: " + (totalRound+1);
 
     }
 
