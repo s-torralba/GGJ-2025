@@ -104,6 +104,10 @@ public class BubbleManager : MonoBehaviour
         float y = Random.Range(-spawnArea.y / 2, spawnArea.y / 2);
         Vector3 spawnPosition = new Vector3(x + transform.position.x, y + transform.position.y, 0f);
 
+        if (lettersToGenerate.Count == 0)
+        {
+            return;
+        }
         char letter = lettersToGenerate.Last();
         lettersToGenerate.Remove(letter);
 

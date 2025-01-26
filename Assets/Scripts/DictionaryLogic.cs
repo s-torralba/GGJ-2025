@@ -75,14 +75,17 @@ public class WordDictionary : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void ProcessWord(string word)
     {
-        string word = mWordToFind.text.Trim();
         bool WordFound = FindWord(word);
         if (WordFound)
         {
             OnValidWord?.Invoke(word);
         }
         Debug.Log($"Word '{mWordToFind}' found: {WordFound}");
+    }
+    public void SubscribeToOnWord(LetterAccumulator accumulator)
+    {
+        accumulator.OnWord += ProcessWord;
     }
 }

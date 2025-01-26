@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6992922980458025591}
   - component: {fileID: 4858005981888743234}
   - component: {fileID: 2077463075312342575}
+  - component: {fileID: 8925065117115515988}
   m_Layer: 5
   m_Name: Letter
   m_TagString: Untagged
@@ -90,3 +91,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4858005981888743234}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &8925065117115515988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357778805289671692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d699b100e374d84aa397d48b2f0d335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  letterImage: {fileID: 4858005981888743234}
