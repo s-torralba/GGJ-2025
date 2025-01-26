@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class LetterAccumulator : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private GameObject letterSlotPrefab; // Prefab for the draggable letter object
+    [SerializeField] private GameObject letterSlotPrefab;
 
     public event Action<string> OnWord;
 
@@ -16,10 +16,8 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
 
     private void Update()
     {
-        // Loop through all children of this object
         foreach (Transform child in transform)
         {
-            // Check if the child has a LetterData component
             LetterData letterData = child.GetComponentInChildren<LetterData>();
             if (letterData == null)
             {
@@ -30,7 +28,6 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
                         break;
                     }
                 }
-                        // If no LetterData component is found, destroy the child
                 Debug.LogWarning($"Child {child.name} does not have a LetterData component. Deleting it.");
                 Destroy(child.gameObject);
                 ProcessWord();
@@ -53,10 +50,8 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
             GameObject newLetterSlot = Instantiate(letterSlotPrefab);
             newLetterSlot.transform.SetParent(transform, false);
 
-            // Get the IDropHandler component from the newLetterSlot
             IDropHandler dropHandler = newLetterSlot.GetComponent<IDropHandler>();
 
-            // Call OnDrop on the newLetterSlot if it has a valid IDropHandler
             if (dropHandler != null)
             {
                 dropHandler.OnDrop(eventData);

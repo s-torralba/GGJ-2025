@@ -7,17 +7,15 @@ using System;
 public class WordDictionary : MonoBehaviour
 {
     public TextAsset mDictionaryFile;
-    private HashSet<string> mWordList; // Use HashSet for faster lookups
+    private HashSet<string> mWordList;
 
     public TMP_InputField mWordToFind;
 
     public event Action<string> OnValidWord;
     public event Action OnWrongWord;
 
-    // Start is called before the first frame update
     void Start()
     {
-        // Initialize the HashSet and load words
         mWordList = new HashSet<string>();
 
         if (mDictionaryFile != null)
@@ -45,27 +43,21 @@ public class WordDictionary : MonoBehaviour
 
     public List<string> ChooseWords(int numberOfWords)
     {
-        // Convert HashSet to a List for indexed access
         List<string> wordList = new List<string>(mWordList);
 
-        // Handle cases where the requested number of words exceeds the available words
         if (numberOfWords > wordList.Count)
         {
             Debug.LogWarning("Requested more words than available. Returning all words.");
             return wordList;
         }
 
-        // Create a list to store the chosen words
         List<string> chosenWords = new List<string>();
         System.Random random = new System.Random();
 
-        // Randomly pick words
         while (chosenWords.Count < numberOfWords)
         {
-            // Get a random word from the list
             string randomWord = wordList[random.Next(0, wordList.Count)];
 
-            // Avoid duplicates in the chosen words list
             if (!chosenWords.Contains(randomWord))
             {
                 chosenWords.Add(randomWord);
@@ -75,7 +67,6 @@ public class WordDictionary : MonoBehaviour
         return chosenWords;
     }
 
-    // Update is called once per frame
     void ProcessWord(string word)
     {
         bool WordFound = FindWord(word);

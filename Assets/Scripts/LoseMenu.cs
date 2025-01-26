@@ -11,17 +11,6 @@ public class LoseMenu : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreRecord;
     [SerializeField] TextMeshProUGUI roundRecord;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnEnable()
     {

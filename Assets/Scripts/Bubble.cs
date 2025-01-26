@@ -41,7 +41,6 @@ public class Bubble : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         _time += Time.fixedDeltaTime;
@@ -52,7 +51,6 @@ public class Bubble : MonoBehaviour
 
     void OnMouseDown()
     {
-        // Example: Play sound or animation here
         Debug.Log("Bubble popped!");
 
         if (letterCollector != null)
@@ -62,7 +60,6 @@ public class Bubble : MonoBehaviour
 
         audioSource.Play();
         components.SetActive(false);
-        // Destroy the bubble
         Destroy(gameObject, audioSource.clip.length);
     }
 
@@ -95,12 +92,10 @@ public class Bubble : MonoBehaviour
         string computedPath = spritePath + uppercaseLetter;
         if (spriteRenderer != null)
         {
-            // Load the new sprite from the Resources folder
             Sprite newSprite = Resources.Load<Sprite>(computedPath);
 
             if (newSprite != null)
             {
-                // Assign the new sprite to the SpriteRenderer
                 spriteRenderer.sprite = newSprite;
                 Debug.Log($"Sprite successfully changed to: {computedPath}");
             }

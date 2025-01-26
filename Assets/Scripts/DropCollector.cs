@@ -30,12 +30,6 @@ public class DropCollector : MonoBehaviour, IDropHandler
                         dropped.transform.SetParent(gridItem.transform);
                         gridItem.GetComponent<InventorySlot>().UpdateParent(gridItem.transform);
                         break;
-                        /*letterData.letter = droppedLetterData.letter;
-                        LetterImageSwitcher letterImage = dropped.GetComponent<LetterImageSwitcher>();
-                        if (letterImage != null)
-                        {
-                            letterImage.ChangeLetter(letterData.letter);
-                        }*/
                     }
                 }
             }

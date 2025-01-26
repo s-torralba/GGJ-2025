@@ -12,17 +12,11 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreRecord;
     [SerializeField] TextMeshProUGUI roundRecord;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Perform your action here
             Debug.Log("Escape key pressed!");
             if (canvas.activeSelf)
             {

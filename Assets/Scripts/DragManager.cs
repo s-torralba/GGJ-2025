@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class DragManager : MonoBehaviour
 {
-    private static DragManager instance; // Singleton instance
+    private static DragManager instance;
     public static DragManager Instance => instance;
 
-    private int activeDrags = 0; // Tracks how many objects are currently being dragged
+    private int activeDrags = 0;
 
-    // Property to check if anything is being dragged
     public bool IsAnythingBeingDragged => activeDrags > 0;
 
     private void Awake()
     {
-        // Ensure only one instance of DragManager exists
         if (instance == null)
         {
             instance = this;
@@ -23,17 +21,15 @@ public class DragManager : MonoBehaviour
         }
     }
 
-    // Called when dragging starts
     public void RegisterDragStart()
     {
         activeDrags++;
         Debug.Log($"Dragging started. Active drags: {activeDrags}");
     }
 
-    // Called when dragging ends
     public void RegisterDragEnd()
     {
-        activeDrags = Mathf.Max(0, activeDrags - 1); // Prevent negative values
+        activeDrags = Mathf.Max(0, activeDrags - 1);
         Debug.Log($"Dragging ended. Active drags: {activeDrags}");
     }
 }

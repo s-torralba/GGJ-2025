@@ -22,12 +22,6 @@ public class MainMenu : MonoBehaviour
         roundRecord.text = "Round Record: " + gameManager.maxRound.ToString();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void OnStartPressed()
     {
         this.gameObject.SetActive(false);

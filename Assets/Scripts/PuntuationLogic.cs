@@ -1,20 +1,19 @@
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
-using UnityEngine.UI; // Required for UI components
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
 public class WordScorer : MonoBehaviour
 {
-    public TextAsset letterWeightsFile;    // Assign your .txt file here in the Inspector
-    public TextMeshProUGUI scoreOutputText;          // Text element to display the score (optional)
-    public TextMeshProUGUI targetOutputText;          // Text element to display the score (optional)
+    public TextAsset letterWeightsFile;
+    public TextMeshProUGUI scoreOutputText;
+    public TextMeshProUGUI targetOutputText;
     public int lastScore = 0;
 
-    private Dictionary<char, int> letterWeights; // To store letter and weight pairs
+    private Dictionary<char, int> letterWeights;
 
-    // Start is called before the first frame update
     void Start()
     {
         letterWeights = new Dictionary<char, int>();
@@ -29,22 +28,21 @@ public class WordScorer : MonoBehaviour
         }
     }
 
-    // Method to parse the letter weights file
     private void ParseLetterWeights(string fileContent)
     {
-        string[] lines = fileContent.Split('\n'); // Split by lines
+        string[] lines = fileContent.Split('\n');
 
         foreach (string line in lines)
         {
-            if (!string.IsNullOrWhiteSpace(line)) // Ignore empty lines
+            if (!string.IsNullOrWhiteSpace(line))
             {
-                string[] parts = line.Split(':'); // Split each line into letter and weight
+                string[] parts = line.Split(':');
                 if (parts.Length == 2)
                 {
-                    char letter = parts[0].Trim()[0]; // Get the letter
+                    char letter = parts[0].Trim()[0];
                     if (int.TryParse(parts[1].Trim(), out int weight))
                     {
-                        letterWeights[letter] = weight; // Add to dictionary
+                        letterWeights[letter] = weight;
                     }
                     else
                     {
@@ -61,16 +59,15 @@ public class WordScorer : MonoBehaviour
         Debug.Log("Letter weights successfully parsed.");
     }
 
-    // Method to calculate the score of a word
     public int CalculateWordScore(string word)
     {
         int score = 0;
 
-        foreach (char letter in word.ToUpper()) // Convert to uppercase for case-insensitivity
+        foreach (char letter in word.ToUpper())
         {
             if (letterWeights.TryGetValue(letter, out int weight))
             {
-                score += weight; // Add the letter's weight to the score
+                score += weight;
             }
             else
             {
@@ -81,24 +78,20 @@ public class WordScorer : MonoBehaviour
         return score;
     }
 
-    // Subscribes to the Dictionary's OnValidWord event
     public void SubscribeToDictionary(WordDictionary dictionary)
     {
         dictionary.OnValidWord += EvaluateWordScore;
         dictionary.OnWrongWord += PrintScoreError;
     }
 
-    // Method called by the UI to calculate and display the score of the entered word
     public void EvaluateWordScore(string inputWord)
     {
         if (inputWord != null)
         {
             int wordScore = CalculateWordScore(inputWord);
 
-            // Display the score in the UI
             if (scoreOutputText != null)
             {
-                //ScoreOutputText.text = $"The score for '{inputWord}' is: {wordScore}";
                 scoreOutputText.text = $"SCORE: {wordScore}";
                 lastScore = wordScore;
             }
@@ -113,7 +106,6 @@ public class WordScorer : MonoBehaviour
 
     public void UpdateTarget(int targetScore)
     {
-        // Display the score in the UI
         if (targetOutputText != null)
         {
             targetOutputText.text = $"TARGET: {targetScore}";

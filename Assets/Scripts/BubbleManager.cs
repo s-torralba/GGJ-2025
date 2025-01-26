@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class BubbleManager : MonoBehaviour
 {
-    // Bubble generation
     public GameObject bubblePrefab;
 
     public Vector2 spawnArea = new Vector2(8f, 5f);
@@ -16,7 +15,6 @@ public class BubbleManager : MonoBehaviour
 
     private float _timer;
 
-    // Letter generation
     public List<string> wordsToGenerate = new List<string>();
     [SerializeField] private List<char> lettersToGenerate = new List<char>();
     [SerializeField] private LetterCollector letterCollector;
@@ -47,11 +45,9 @@ public class BubbleManager : MonoBehaviour
     {
         hasFinished = false;
         wordsToGenerate = words;
-        // Dictionary to track max occurrences of each letter across all words
         Dictionary<char, int> resultLetterMap = new Dictionary<char, int>();
         foreach (string word in words)
         {
-            // Temporary dictionary for counting letters in the current word
             Dictionary<char, int> currentWordMap = new Dictionary<char, int>();
             string uppercaseWord = word.ToUpper();
 
@@ -67,7 +63,6 @@ public class BubbleManager : MonoBehaviour
                 }
             }
 
-            // Update the global letterCounts with the maximum occurrences from the current word
             foreach (KeyValuePair<char, int> letterOnCurrentWord in currentWordMap)
             {
                 if (resultLetterMap.ContainsKey(letterOnCurrentWord.Key))
@@ -81,7 +76,6 @@ public class BubbleManager : MonoBehaviour
             }
         }
 
-        // Create the final list of letters based on max counts
         List<char> result = new List<char>();
         foreach (KeyValuePair<char, int> kvp in resultLetterMap)
         {
@@ -91,14 +85,12 @@ public class BubbleManager : MonoBehaviour
             }
         }
 
-        // Add random letters
         for (int i = 0; i < randomLettersAdded; i++)
         {
             char randomLetter = (char)Random.Range('A', 'Z' + 1);
             result.Add(randomLetter);
         }
 
-        // Shuffle the result
         result = result.OrderBy(_ => Random.value).ToList();
 
         lettersToGenerate = result;
@@ -106,7 +98,6 @@ public class BubbleManager : MonoBehaviour
 
     void SpawnBubble()
     {
-        // Spawn at random position within the area
         float x = Random.Range(-spawnArea.x / 2, spawnArea.x / 2);
         float y = Random.Range(-spawnArea.y / 2, spawnArea.y / 2);
         Vector3 spawnPosition = new Vector3(x + transform.position.x, y + transform.position.y, 0f);
@@ -118,12 +109,10 @@ public class BubbleManager : MonoBehaviour
         char letter = lettersToGenerate.First();
         lettersToGenerate.Remove(letter);
 
-        // Instantiate the bubble prefab
         GameObject bubble = Instantiate(bubblePrefab, spawnPosition, Quaternion.identity, transform);
 
         Debug.Log("Bubble spawned");
         
-        // Scale it
         float randomScale = Random.Range(scaleRange.x, scaleRange.y);
         Vector3 randomScaleVector = new Vector3(randomScale, randomScale, randomScale);
         bubble.transform.localScale = randomScaleVector;
