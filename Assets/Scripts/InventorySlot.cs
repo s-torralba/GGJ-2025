@@ -26,4 +26,16 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             }
         }
     }
+
+    public void UpdateParent (Transform parentTransform)
+    {
+        foreach (Transform gridItem in transform)
+        {
+            DraggableItem draggableItem = gridItem.GetComponent<DraggableItem>();
+            if (draggableItem != null)
+            {
+                draggableItem.parentAfterDrag = transform;
+            }
+        }
+    }
 }

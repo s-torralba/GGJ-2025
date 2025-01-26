@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class LetterData : MonoBehaviour
 {
-    public string letter = ""; 
+    public string letter = "";
+    public bool onDropFailed = false;
 }
