@@ -342,7 +342,7 @@ MonoBehaviour:
   m_fontSize: 75
   m_fontSizeBase: 75
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 32
@@ -1081,6 +1081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterWeightsFile: {fileID: 4900000, guid: cc91f378ca67c5348b4e9b526c2cee78, type: 3}
   scoreOutputText: {fileID: 1301854807}
+  targetOutputText: {fileID: 150552157}
   lastScore: 0
 --- !u!4 &585378850
 Transform:

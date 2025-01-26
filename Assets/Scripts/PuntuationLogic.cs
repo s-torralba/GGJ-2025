@@ -9,6 +9,7 @@ public class WordScorer : MonoBehaviour
 {
     public TextAsset letterWeightsFile;    // Assign your .txt file here in the Inspector
     public TextMeshProUGUI scoreOutputText;          // Text element to display the score (optional)
+    public TextMeshProUGUI targetOutputText;          // Text element to display the score (optional)
     public int lastScore = 0;
 
     private Dictionary<char, int> letterWeights; // To store letter and weight pairs
@@ -107,6 +108,15 @@ public class WordScorer : MonoBehaviour
         else
         {
             Debug.LogError("WordInputField is not assigned!");
+        }
+    }
+
+    public void UpdateTarget(int targetScore)
+    {
+        // Display the score in the UI
+        if (targetOutputText != null)
+        {
+            targetOutputText.text = $"TARGET: {targetScore}";
         }
     }
 
