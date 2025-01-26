@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameManager gameManager;
 
+    [SerializeField] TextMeshProUGUI scoreRecord;
+    [SerializeField] TextMeshProUGUI roundRecord;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,9 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 0f;
         canvas.SetActive(true);
+        scoreRecord.text = "Score: " + gameManager.totalScore.ToString();
+        roundRecord.text = "Round: " + gameManager.totalRound.ToString();
+
     }
 
     public void OnContinuePressed()

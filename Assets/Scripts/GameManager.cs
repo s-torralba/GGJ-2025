@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     public int numberOfWordsPerLevel = 4;
     public int randomLettersToAddPerLevel = 7;
 
-    private int totalScore = 0;
-    private int totalRound = 0;
+    public int totalScore = 0;
+    public int totalRound = 0;
     public int maxScore = 0;
     public int maxRound = 0;
 
