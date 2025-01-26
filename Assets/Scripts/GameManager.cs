@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     private bool hasStarted = false;
     private int collectedCount = 0;
+
+    private int scoreTarget = 3;
     
     //[Header("UI Components")]
     //public TMP_InputField wordInputField; // InputField for player to type a word
@@ -77,9 +79,11 @@ public class GameManager : MonoBehaviour
             collectedCount = currentlyCollected;
         }
 
-        if (bubbleManager.hasFinished && hasStarted)
+        if (!HUDDown.activeSelf && bubbleManager.hasFinished && hasStarted)
         {
             HUDDown.SetActive(true);
+            puntuator.UpdateTarget(scoreTarget);
+
         }
     }
 
@@ -132,12 +136,14 @@ public class GameManager : MonoBehaviour
 
         letterCollector.collectedLetters = new List<string>();
         collectedCount = 0;
+
     }
 
     public void EndRound(int scoreGained, bool hasLost)
     {
         totalScore += scoreGained;
         totalRound++;
+        scoreTarget++;
         
         if (hasLost)
         {
@@ -159,8 +165,7 @@ public class GameManager : MonoBehaviour
 
     public void OnSendPressed()
     {
-        int target = 5;
-        bool hasLost = target > puntuator.lastScore;
+        bool hasLost = scoreTarget > puntuator.lastScore;
         EndRound(puntuator.lastScore, hasLost);
     }
 }
