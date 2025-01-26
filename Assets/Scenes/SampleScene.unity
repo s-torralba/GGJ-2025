@@ -1010,6 +1010,16 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1455867000}
+    - target: {fileID: 6178663084914210803, guid: 3f23edd1528d0cb4188a31f376e883f8, type: 3}
+      propertyPath: m_text
+      value: 'Score: 0
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178663084914210803, guid: 3f23edd1528d0cb4188a31f376e883f8, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6229349914536798352, guid: 3f23edd1528d0cb4188a31f376e883f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -480
@@ -1049,6 +1059,14 @@ PrefabInstance:
     - target: {fileID: 6229349914536798352, guid: 3f23edd1528d0cb4188a31f376e883f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591781243436511476, guid: 3f23edd1528d0cb4188a31f376e883f8, type: 3}
+      propertyPath: m_text
+      value: 'Round: 0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591781243436511476, guid: 3f23edd1528d0cb4188a31f376e883f8, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2247,6 +2265,22 @@ PrefabInstance:
       propertyPath: bubbleManager
       value: 
       objectReference: {fileID: 1587565492}
+    - target: {fileID: 6498765780829145033, guid: fe174a0b1a2e7b54486430eec353ed5c, type: 3}
+      propertyPath: m_fontSize
+      value: 37.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498765780829145033, guid: fe174a0b1a2e7b54486430eec353ed5c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723341590604859827, guid: fe174a0b1a2e7b54486430eec353ed5c, type: 3}
+      propertyPath: m_fontSize
+      value: 37.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723341590604859827, guid: fe174a0b1a2e7b54486430eec353ed5c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

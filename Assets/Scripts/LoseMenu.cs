@@ -25,8 +25,8 @@ public class LoseMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        scoreRecord.text = "Score Record: " + gameManager.maxScore.ToString();
-        roundRecord.text = "Round Record: " + gameManager.maxRound.ToString();
+        scoreRecord.text = "Score: " + gameManager.maxScore.ToString();
+        roundRecord.text = "Round: " + gameManager.maxRound.ToString();
     }
 
     public void OnRestartPressed()
