@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] TextMeshProUGUI scoreRecord;
     [SerializeField] TextMeshProUGUI roundRecord;
+    [SerializeField] GameObject HUD;
 
     private void OnEnable()
     {
@@ -32,6 +33,7 @@ public class MainMenu : MonoBehaviour
     public void OnStartPressed()
     {
         this.gameObject.SetActive(false);
+        HUD.SetActive(true);
         gameManager.StartGame();
     }
 
