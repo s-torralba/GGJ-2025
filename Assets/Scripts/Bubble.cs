@@ -20,6 +20,9 @@ public class Bubble : MonoBehaviour
 
     private static string spritePath = "kenney_letter-tiles (1)/PNG/Wood/letter_";
 
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] GameObject components;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         directionX *= -1;
@@ -57,8 +60,10 @@ public class Bubble : MonoBehaviour
             letterCollector.CollectLetter(letterName);
         }
 
+        audioSource.Play();
+        components.SetActive(false);
         // Destroy the bubble
-        Destroy(gameObject);
+        Destroy(gameObject, audioSource.clip.length);
     }
 
     void OnDestroy()
