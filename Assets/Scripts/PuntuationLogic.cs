@@ -116,4 +116,10 @@ public class WordScorer : MonoBehaviour
         lastScore = 0;
 
     }
+
+    public void Reset()
+    {
+        scoreOutputText.text = $"SCORE: - ";
+        lastScore = 0;
+    }
 }

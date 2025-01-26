@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
         {
             HUDDown.GetComponentInChildren<LetterAccumulator>().ResetChildren();
         }
+        puntuator.Reset();
         HUDDown.SetActive(false);
 
         letterCollector.collectedLetters = new List<string>();
