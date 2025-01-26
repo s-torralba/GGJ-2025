@@ -10,7 +10,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] TextMeshProUGUI scoreRecord;
     [SerializeField] TextMeshProUGUI roundRecord;
-    [SerializeField] GameObject HUD;
+
+    [SerializeField] BubbleManager bubbleManager;
+    [SerializeField] GameObject HUDUp;
+
+    public bool hasStarted = false;
 
     private void OnEnable()
     {
@@ -24,16 +28,11 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnStartPressed()
     {
         this.gameObject.SetActive(false);
-        HUD.SetActive(true);
+        hasStarted = true;
+        HUDUp.SetActive(true);
         gameManager.StartGame();
     }
 

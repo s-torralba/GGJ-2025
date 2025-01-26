@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject letterSlotPrefab; // Prefab for the draggable letter object
     [SerializeField] private GameObject letterPrefab; // Prefab for the draggable letter object
 
+    [SerializeField] GameObject HUDDown;
+
+    private bool hasStarted = false;
     private int collectedCount = 0;
     
     //[Header("UI Components")]
@@ -71,6 +74,11 @@ public class GameManager : MonoBehaviour
             }
             collectedCount = currentlyCollected;
         }
+
+        if (bubbleManager.hasFinished && hasStarted)
+        {
+            HUDDown.SetActive(true);
+        }
     }
 
     // Called when the player presses Enter or a button to validate a word
@@ -98,6 +106,7 @@ public class GameManager : MonoBehaviour
     {
         totalScore = 0;
         totalRound = 0;
+        hasStarted = true;
         StartRound();
     }
 

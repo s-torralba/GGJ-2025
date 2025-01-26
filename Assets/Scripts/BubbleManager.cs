@@ -21,6 +21,7 @@ public class BubbleManager : MonoBehaviour
     [SerializeField] private List<char> lettersToGenerate = new List<char>();
     [SerializeField] private LetterCollector letterCollector;
 
+    public bool hasFinished = false;
 
     void Start()
     {
@@ -35,10 +36,16 @@ public class BubbleManager : MonoBehaviour
             SpawnBubble();
             _timer = 0f;
         }
+
+        if (transform.childCount == 0 && lettersToGenerate.Count == 0)
+        {
+            hasFinished = true;
+        }
     }
 
     public void ChooseLetters(List<string> words, int randomLettersAdded)
     {
+        hasFinished = false;
         wordsToGenerate = words;
         // Dictionary to track max occurrences of each letter across all words
         Dictionary<char, int> resultLetterMap = new Dictionary<char, int>();
