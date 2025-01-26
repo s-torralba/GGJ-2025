@@ -46,7 +46,16 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
 
     private void ProcessWord()
     {
-        string word = "cat";
+        string word = "";
+        foreach (Transform child in transform)
+        {
+            LetterData letterData = child.GetComponentInChildren<LetterData>();
+            if (letterData)
+            {
+                word += letterData.letter;
+            }
+
+        }
         OnWord?.Invoke(word);
     }
 }

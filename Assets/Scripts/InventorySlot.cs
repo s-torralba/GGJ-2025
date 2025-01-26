@@ -16,6 +16,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 if (draggableItem != null)
                 {
                     draggableItem.parentAfterDrag = transform;
+                    draggableItem.UpdateParent();
                 }
             }
 
