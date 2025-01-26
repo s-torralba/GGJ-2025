@@ -84,6 +84,7 @@ public class WordScorer : MonoBehaviour
     public void SubscribeToDictionary(WordDictionary dictionary)
     {
         dictionary.OnValidWord += EvaluateWordScore;
+        dictionary.OnWrongWord += PrintScoreError;
     }
 
     // Method called by the UI to calculate and display the score of the entered word
@@ -107,5 +108,12 @@ public class WordScorer : MonoBehaviour
         {
             Debug.LogError("WordInputField is not assigned!");
         }
+    }
+
+    public void PrintScoreError()
+    {
+        scoreOutputText.text = $"SCORE: - ";
+        lastScore = 0;
+
     }
 }

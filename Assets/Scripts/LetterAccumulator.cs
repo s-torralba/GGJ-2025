@@ -16,7 +16,19 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
 
     private void Update()
     {
-
+        // Loop through all children of this object
+        foreach (Transform child in transform)
+        {
+            // Check if the child has a LetterData component
+            LetterData letterData = child.GetComponentInChildren<LetterData>();
+            if (letterData == null)
+            {
+                // If no LetterData component is found, destroy the child
+                Debug.LogWarning($"Child {child.name} does not have a LetterData component. Deleting it.");
+                Destroy(child.gameObject);
+                ProcessWord();
+            }
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -46,7 +58,16 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
 
     private void ProcessWord()
     {
-        string word = "cat";
+        string word = "";
+        foreach (Transform child in transform)
+        {
+            LetterData letterData = child.GetComponentInChildren<LetterData>();
+            if (letterData)
+            {
+                word += letterData.letter;
+            }
+
+        }
         OnWord?.Invoke(word);
     }
 }

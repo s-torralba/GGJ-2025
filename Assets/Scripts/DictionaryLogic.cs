@@ -12,6 +12,7 @@ public class WordDictionary : MonoBehaviour
     public TMP_InputField mWordToFind;
 
     public event Action<string> OnValidWord;
+    public event Action OnWrongWord;
 
     // Start is called before the first frame update
     void Start()
@@ -81,8 +82,12 @@ public class WordDictionary : MonoBehaviour
         if (WordFound)
         {
             OnValidWord?.Invoke(word);
+            Debug.Log($"Word '{mWordToFind}' found: {WordFound}");
         }
-        Debug.Log($"Word '{mWordToFind}' found: {WordFound}");
+        else
+        {
+            OnWrongWord?.Invoke();
+        }
     }
     public void SubscribeToOnWord(LetterAccumulator accumulator)
     {

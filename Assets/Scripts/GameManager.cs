@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
                 newLetter.transform.SetParent(newLetterSlot.transform, false);
                 
                 newLetter.GetComponent<LetterImageSwitcher>().ChangeLetter(letterCollector.collectedLetters[i].ToString());
+                newLetter.GetComponent<LetterData>().letter = letterCollector.collectedLetters[i];
             }
             collectedCount = currentlyCollected;
         }

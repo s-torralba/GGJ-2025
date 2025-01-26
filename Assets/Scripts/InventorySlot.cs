@@ -19,6 +19,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 {
                     PlayAudio();
                     draggableItem.parentAfterDrag = transform;
+                    draggableItem.UpdateParent();
                 }
             }
 
@@ -40,6 +41,18 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         }
         audioSource.volume = 0.8f;
         audioSource.Play();
+    }
+    
+    public void UpdateParent (Transform parentTransform)
+    {
+        foreach (Transform gridItem in transform)
+        {
+            DraggableItem draggableItem = gridItem.GetComponent<DraggableItem>();
+            if (draggableItem != null)
+            {
+                draggableItem.parentAfterDrag = transform;
+            }
+        }
     }
 }
 
