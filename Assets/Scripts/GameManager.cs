@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
         HUDDown.SetActive(false);
 
         letterCollector.collectedLetters = new List<string>();
+        collectedCount = 0;
     }
 
     public void EndRound(int scoreGained, bool hasLost)
