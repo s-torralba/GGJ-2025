@@ -115,7 +115,7 @@ public class BubbleManager : MonoBehaviour
         {
             return;
         }
-        char letter = lettersToGenerate.Last();
+        char letter = lettersToGenerate.First();
         lettersToGenerate.Remove(letter);
 
         // Instantiate the bubble prefab
