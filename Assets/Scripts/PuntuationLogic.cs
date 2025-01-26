@@ -7,8 +7,9 @@ using System.Collections;
 
 public class WordScorer : MonoBehaviour
 {
-    public TextAsset LetterWeightsFile;    // Assign your .txt file here in the Inspector
-    public TextMeshProUGUI ScoreOutputText;          // Text element to display the score (optional)
+    public TextAsset letterWeightsFile;    // Assign your .txt file here in the Inspector
+    public TextMeshProUGUI scoreOutputText;          // Text element to display the score (optional)
+    public int lastScore = 0;
 
     private Dictionary<char, int> letterWeights; // To store letter and weight pairs
 
@@ -17,9 +18,9 @@ public class WordScorer : MonoBehaviour
     {
         letterWeights = new Dictionary<char, int>();
 
-        if (LetterWeightsFile != null)
+        if (letterWeightsFile != null)
         {
-            ParseLetterWeights(LetterWeightsFile.text);
+            ParseLetterWeights(letterWeightsFile.text);
         }
         else
         {
@@ -93,10 +94,11 @@ public class WordScorer : MonoBehaviour
             int wordScore = CalculateWordScore(inputWord);
 
             // Display the score in the UI
-            if (ScoreOutputText != null)
+            if (scoreOutputText != null)
             {
                 //ScoreOutputText.text = $"The score for '{inputWord}' is: {wordScore}";
-                ScoreOutputText.text = $"SCORE: {wordScore}";
+                scoreOutputText.text = $"SCORE: {wordScore}";
+                lastScore = wordScore;
             }
 
             Debug.Log($"The score for '{inputWord}' is: {wordScore}");

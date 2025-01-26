@@ -52,17 +52,18 @@ public class Bubble : MonoBehaviour
         // Example: Play sound or animation here
         Debug.Log("Bubble popped!");
 
+        if (letterCollector != null)
+        {
+            letterCollector.CollectLetter(letterName);
+        }
+
         // Destroy the bubble
         Destroy(gameObject);
     }
 
     void OnDestroy()
     {
-        // When the bubble is destroyed, send its letterName to the LetterCollector
-        if (letterCollector != null)
-        {
-            letterCollector.CollectLetter(letterName);
-        }
+        
     }
 
     private void _RotateLetter()

@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SocialPlatforms.Impl; // Required for TextMeshPro
+using UnityEngine.UI;
+using Unity.VisualScripting; // Required for TextMeshPro
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,16 @@ public class GameManager : MonoBehaviour
     public int maxScore = 0;
     public int maxRound = 0;
 
+    public LetterAccumulator letterAccumulator;        // Reference to the Puntuator script
+
+    public LetterCollector letterCollector; // Reference to the Letter Collector script
+    public GridLayoutGroup letterBoardGrid; // Reference to the letter board grid layout group
+
+    [SerializeField] private GameObject letterSlotPrefab; // Prefab for the draggable letter object
+    [SerializeField] private GameObject letterPrefab; // Prefab for the draggable letter object
+
+    private int collectedCount = 0;
+    
     //[Header("UI Components")]
     //public TMP_InputField wordInputField; // InputField for player to type a word
     //public TextMeshProUGUI feedbackText;  // Text to display feedback (e.g., valid/invalid, score)
@@ -33,11 +45,31 @@ public class GameManager : MonoBehaviour
         }
 
         // Subscribe Puntuator to Dictionary's word validation event
+        dictionary.SubscribeToOnWord(letterAccumulator);
         puntuator.SubscribeToDictionary(dictionary);
 
         // Clear feedback text on start
         //feedbackText.text = "Type a word and press Enter to validate!";
 
+    }
+
+    private void Update()
+    {
+        int currentlyCollected = letterCollector.collectedLetters.Count;
+        if (currentlyCollected > 0 && currentlyCollected != collectedCount)
+        {
+            for (int i = collectedCount; i < letterCollector.collectedLetters.Count; i++)
+            {
+                GameObject newLetterSlot = Instantiate(letterSlotPrefab);
+                newLetterSlot.transform.SetParent(letterBoardGrid.transform, false);
+
+                GameObject newLetter = Instantiate(letterPrefab);
+                newLetter.transform.SetParent(newLetterSlot.transform, false);
+                
+                newLetter.GetComponent<LetterImageSwitcher>().ChangeLetter(letterCollector.collectedLetters[i].ToString());
+            }
+            collectedCount = currentlyCollected;
+        }
     }
 
     // Called when the player presses Enter or a button to validate a word
