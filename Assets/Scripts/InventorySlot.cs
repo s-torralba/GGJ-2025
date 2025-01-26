@@ -38,6 +38,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             AudioClip clip = Resources.Load<AudioClip>("LetterPlaced");
             audioSource.clip = clip;
         }
+        audioSource.volume = 0.8f;
         audioSource.Play();
     }
 }
