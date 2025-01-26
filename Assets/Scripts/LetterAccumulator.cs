@@ -30,6 +30,13 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
             }
         }
     }
+    public void ResetChildren()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
     public void OnDrop(PointerEventData eventData)
     {

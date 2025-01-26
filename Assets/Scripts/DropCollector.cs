@@ -7,6 +7,13 @@ public class DropCollector : MonoBehaviour, IDropHandler
 {
     [SerializeField] private GameObject gridObject;
 
+    public void ResetChildren()
+    {
+        foreach (Transform child in gridObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;

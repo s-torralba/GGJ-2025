@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoseMenu : MonoBehaviour
 {
@@ -30,8 +31,8 @@ public class LoseMenu : MonoBehaviour
 
     public void OnRestartPressed()
     {
-        this.gameObject.SetActive(false);
-        gameManager.StartGame();
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void OnBackPressed()

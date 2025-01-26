@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject letterSlotPrefab; // Prefab for the draggable letter object
     [SerializeField] private GameObject letterPrefab; // Prefab for the draggable letter object
 
+    [SerializeField] GameObject HUDUp;
     [SerializeField] GameObject HUDDown;
+    [SerializeField] GameObject LoseScreen;
 
     private bool hasStarted = false;
     private int collectedCount = 0;
@@ -114,6 +116,20 @@ public class GameManager : MonoBehaviour
     {
         List<string> wordsChosen = dictionary.ChooseWords(numberOfWordsPerLevel);
         bubbleManager.ChooseLetters(wordsChosen, randomLettersToAddPerLevel);
+
+        if (HUDUp.GetComponentInChildren<DropCollector>())
+        {
+            HUDUp.GetComponentInChildren<DropCollector>().ResetChildren();
+        }
+        //HUDUp.SetActive(false);
+
+        if (HUDDown.GetComponentInChildren<LetterAccumulator>())
+        {
+            HUDDown.GetComponentInChildren<LetterAccumulator>().ResetChildren();
+        }
+        HUDDown.SetActive(false);
+
+        letterCollector.collectedLetters = new List<string>();
     }
 
     public void EndRound(int scoreGained, bool hasLost)
@@ -125,12 +141,24 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
+        else 
+        {
+            StartRound();
+        }
     }
 
     private void EndGame()
     {
         maxScore = Mathf.Max(totalScore, maxScore);
         maxRound = Mathf.Max(totalRound, maxRound);
-        // Show Lose Screen
+
+        LoseScreen.SetActive(true);
+    }
+
+    public void OnSendPressed()
+    {
+        int target = 5;
+        bool hasLost = target > puntuator.lastScore;
+        EndRound(puntuator.lastScore, hasLost);
     }
 }
