@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cd1c35a2a23242b68c67d7af7e4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 1.3, y: 1.56}
+  speed: {x: 2, y: 2.5}
   frequency: 4.63
   letter: {fileID: 8722250909144051179}
   maxLetterRotation: 40

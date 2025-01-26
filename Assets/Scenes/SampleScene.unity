@@ -6992,7 +6992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 1824499279631301508, guid: 79da101f4cdbc074b87ca3cf037a69a4, type: 3}
   spawnArea: {x: 10, y: 2}
-  spawnInterval: 0.8
+  spawnInterval: 0.4
   scaleRange: {x: 0.5, y: 2}
   wordsToGenerate: []
   lettersToGenerate: 
