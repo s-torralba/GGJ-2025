@@ -23,7 +23,14 @@ public class LetterAccumulator : MonoBehaviour, IDropHandler
             LetterData letterData = child.GetComponentInChildren<LetterData>();
             if (letterData == null)
             {
-                // If no LetterData component is found, destroy the child
+                if (DragManager.Instance != null)
+                {
+                    if (DragManager.Instance.IsAnythingBeingDragged)
+                    {
+                        break;
+                    }
+                }
+                        // If no LetterData component is found, destroy the child
                 Debug.LogWarning($"Child {child.name} does not have a LetterData component. Deleting it.");
                 Destroy(child.gameObject);
                 ProcessWord();
